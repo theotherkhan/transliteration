@@ -1,15 +1,22 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 from collections import OrderedDict
 import sys
+import nltk.data
 
 fin = open(sys.argv[1], 'r')
 fout = open(sys.argv[1]+'roman', 'w')
 d2r_dict=OrderedDict([
+
 ('ख़्त','kht'),
 ('र्फ़','rf'),
 ('ख़ु','khu'),
 ('फ़्ज़','fz'),
 ('ज़्य','ziy'),
+('ख़्व', 'khv'),
+('ज़्ल','zl'),
+
 ('क्','k'),
 ('क़्','q'),
 ('ख्','kh'),
@@ -38,8 +45,9 @@ d2r_dict=OrderedDict([
 ('भ्','bh'),
 ('म्','m'),
 ('य्','y'),
-('र्','r'),
 ('ड़्','ṛ'),
+('ढ़्','ṛ'),
+('र्','r'),
 ('ल्','l'),
 ('व्','w'),
 ('श्','sh'),
@@ -51,7 +59,6 @@ d2r_dict=OrderedDict([
 ('फ़्','f'),
 ('फ़','f'),
 ('ख़्','k͟h'),
-('ख़््र', 'kh'),
 
 
 
@@ -445,49 +452,47 @@ d2r_dict=OrderedDict([
 
 
 
-
-('क','k'),
-('ख','kh'),
-('ग','g'),
-('ग़', 'gh'),
-('घ','gh'),
-('ङ','n'),
-('च','ch'),
-('छ','chh'),
-('ज','j'),
-('झ','jh'),
-('ञ','n'),
-('ट','t'),
-('ठ','th'),
-('ड','d'),
-('ढ','dh'),
-('ण','n'),
-('त','t'),
-('थ','th'),
-('द','d'),
-('ध','dh'),
-('न','n'),
-('प','p'),
-('फ','ph'),
-('ब','b'),
-('भ','bh'),
-('म','m'),
-('य','y'),
-('र','r'),
-('ड़','ṛ'),
-('ल','l'),
-('व','w'),
-('श','sh'),
-('स','s'),
-('ज़','z'),
-('ख़','k͟h'),
-('ख़्र','k͟h'),
-('फ़','f'),
-('ग़़', 'ġ'),
-('क़','q'),
-
-
-
+('क़','qa'),
+('क','ka'),
+('ख़','k͟ha'),
+('ख़्र','k͟ha'),
+('ख','kha'),
+('ग़़', 'ġa'),
+('ग़','gha'),
+('ग','ga'),
+('घ','gha'),
+('ङ','na'),
+('च','cha'),
+('छ','chha'),
+('ज़','za'),
+('ज','ja'),
+('झ','jha'),
+('ञ','na'),
+('ट','ta'),
+('ठ','tha'),
+('ड़','ṛa'),
+('ड','da'),
+('ढ़','ṛa'),
+('ढ','dha'),
+('ण','na'),
+('त','ta'),
+('थ','tha'),
+('द','da'),
+('ध','dha'),
+('न','na'),
+('प','pa'),
+('फ़','fa'),
+('फ','pha'),
+('ब','ba'),
+('भ','bha'),
+('म','ma'),
+('य','ya'),
+('र','ra'),
+('ल','la'),
+('व','wa'),
+('श','sha'),
+('स','sa'),
+('ज़','za'),
 
 
 ('ष','श'),
@@ -518,15 +523,26 @@ d2r_dict=OrderedDict([
 ('ौ','au'),
 ('ॉ','au'),
 ('।', '.'),
-('ों', 'onn')
+('ों', 'onn'),
+('़', ''),
 ])
 
 def main():
   text=fin.read()
   for key,value in d2r_dict.items():
   	text=text.replace(key,value)
-  fout.write(text)
   print(text)
+  fout.write(text)
+
+  #from nltk.tokenize import word_tokenize
+  #text = (word_tokenize(text))
+
+  #for word in text:
+    #  print ('Word:', word)
+
+  #print(text)
+
+
 
 if __name__ == '__main__':
-  main()
+    main()
