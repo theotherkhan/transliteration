@@ -4,18 +4,23 @@
 from collections import OrderedDict
 import sys
 import nltk.data
+from nltk.tokenize import word_tokenize
 
 fin = open(sys.argv[1], 'r')
 fout = open(sys.argv[1]+'roman', 'w')
 d2r_dict=OrderedDict([
 
-('ख़्त','kht'),
+('ख़्त','k͟ht'),
 ('र्फ़','rf'),
 ('ख़ु','khu'),
 ('फ़्ज़','fz'),
 ('ज़्य','ziy'),
 ('ख़्व', 'khv'),
 ('ज़्ल','zl'),
+('फ़्तु','ftu'),
+('फ़्त', 'ft'),
+('फ़्तु','ftu'),
+('ख़्य','k͟hy'),
 
 ('क्','k'),
 ('क़्','q'),
@@ -61,11 +66,7 @@ d2r_dict=OrderedDict([
 ('ख़्','k͟h'),
 
 
-
-
 ('ष','श'),
-
-
 
 
 
@@ -450,6 +451,48 @@ d2r_dict=OrderedDict([
 ('ख़्रै','k͟hai'),
 ('ख़्रं','k͟huṅ'),
 
+('क़ ','q '),
+('क ','k '),
+('ख़ ','k͟h '),
+('ख़्र ','k͟h '),
+('ख ','kh '),
+('ग़़ ','ġ '),
+('ग़ ','gh '),
+('ग ','g '),
+('घ ','gh '),
+('ङ ','n '),
+('च ','ch '),
+('छ ','chh '),
+('ज़ ','z '),
+('ज ','j '),
+('झ ','jh '),
+('ञ ','n '),
+('ट ','t '),
+('ठ ','th '),
+('ड़ ','ṛ '),
+('ड ','d '),
+('ढ़ ','ṛ '),
+('ढ ','dh '),
+('ण ','n '),
+('त ','t '),
+('थ ','th '),
+('द ','d '),
+('ध ','dh '),
+('न ','n '),
+('प ','p '),
+('फ़ ','f '),
+('फ ','ph '),
+('ब ','b '),
+('भ ','bh '),
+('म ','m '),
+('य ','y '),
+('र ','r '),
+('ल ','l '),
+('व ','w '),
+('श ','sh '),
+('स ','s '),
+('ज़ ','z '),
+('ह ','h '),
 
 
 ('क़','qa'),
@@ -493,12 +536,12 @@ d2r_dict=OrderedDict([
 ('श','sha'),
 ('स','sa'),
 ('ज़','za'),
+('ह','ha'),
 
 
 ('ष','श'),
-('ह','h'),
 ('ँ','n'),
-('ं','n'),
+('ं','ṉ'),
 ('ः','h'),
 ('अ','a'),
 ('आ','a'),
@@ -527,21 +570,78 @@ d2r_dict=OrderedDict([
 ('़', ''),
 ])
 
+punct_dict_1 = OrderedDict([
+ (',',' ,'),
+ ('.',' .'),
+ ('।', ' ।'),
+ ('?',' ?'),
+ ('!',' !'),
+ ('"',' " '),
+ (':',' : '),
+])
+
+punct_dict_2 = OrderedDict([
+ (' ,',','),
+ (' .','.'),
+ (' ।', '।'),
+ (' ?','?'),
+ (' !','!'),
+ (' " ','"'),
+ (' : ',':'),
+])
+
+colloquial_dict = OrderedDict([
+(' kee ', ' ki '),
+(' kaa ', ' ka '),
+(' jee ', ' ji '),
+(' yaa ', ' ya '),
+(' lie ', ' liye '),
+(' men ', ' mein '),
+(' meṉ ', ' meiṉ '),
+(' n ', ' na '),
+(' sakate ', ' sakte '),
+(' thee ', ' thi '),
+(' usakaa ', ' uska '),
+(' usako ', ' usko '),
+(' unakee ', ' unkee '),
+(' usakee ', ' uskee '),
+(' humane ', ' humne '),
+(' tumane ', ' tumne '),
+(' usane ', ' usne '),
+(' apane ', ' apne '),
+(' a ', ' aa '),
+(' saahab ', ' sahib '),
+(' apane ', ' apne '),
+(' apani ', ' apni '),
+(' karate ', ' karte '),
+(' apako ' , ' apko '),
+(' tumako ' , ' tumko '),
+(' isake ', ' iske '),
+(' isakee ', ' iskee'),
+(' isako ', ' isko '),
+])
+
+###################################################
+
+
 def main():
+
   text=fin.read()
+
+  for key,value in punct_dict_1.items():
+  	text=text.replace(key,value)
+
   for key,value in d2r_dict.items():
   	text=text.replace(key,value)
+
+  for key,value in punct_dict_2.items():
+    text=text.replace(key,value)
+
+  for key,value in colloquial_dict.items():
+    text=text.replace(key,value)
+
   print(text)
   fout.write(text)
-
-  #from nltk.tokenize import word_tokenize
-  #text = (word_tokenize(text))
-
-  #for word in text:
-    #  print ('Word:', word)
-
-  #print(text)
-
 
 
 if __name__ == '__main__':
