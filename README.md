@@ -1,8 +1,6 @@
-# Devanagari-to-roman-script
-Python script that can scan a text file and convert devanagari unicode to roman script w/ modifications for rare consonants primarily used in Urdu
+# Devanagari Transliteration
+A Python script that can scan a text file and convert devanagari unicode to roman script with additional support for consonants primarily used in Urdu.
 
-Input file: Can have any name and is given as an argument while executing the script eg. "python3 d2r.py [Input_filename]"
+The `/inputs` and `/outputs` folders store the inputted devanagari files and output romanized files respectively. Inputs and output filenames are passed as arguments while executing the script:
 
-Output file: Output is printed out in the command line and written to a file named [Input_filename] + "roman"
-
-
+    python transliterate.py inputs/INPUT_FILENAME > outputs/OUTPUT_FILENAME
