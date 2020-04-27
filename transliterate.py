@@ -3,8 +3,6 @@
 
 from collections import OrderedDict
 import sys
-import nltk.data
-from nltk.tokenize import word_tokenize
 
 fin = open(sys.argv[1], 'r')
 fout = open(sys.argv[1]+'roman', 'w')
@@ -629,15 +627,19 @@ def main():
 
   text=fin.read()
 
+  ## Peel off any punctuation
   for key,value in punct_dict_1.items():
   	text=text.replace(key,value)
 
+  ## Replace devanagari letters with roman letters
   for key,value in d2r_dict.items():
   	text=text.replace(key,value)
 
+  ## Reapply punctuation
   for key,value in punct_dict_2.items():
     text=text.replace(key,value)
 
+  ## Replace certain words with colloquial romanizations
   for key,value in colloquial_dict.items():
     text=text.replace(key,value)
 
