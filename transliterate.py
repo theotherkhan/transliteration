@@ -20,6 +20,7 @@ d2r_dict=OrderedDict([
 ('फ़्त', 'ft'),
 ('फ़्तु','ftu'),
 ('ख़्य','k͟hy'),
+('ज़्द', 'zd'),
 
 ('क्','k'),
 ('क़्','q'),
@@ -600,13 +601,15 @@ colloquial_dict = OrderedDict([
 (' n ', ' na '),
 (' sakate ', ' sakte '),
 (' thee ', ' thi '),
-(' usakaa ', ' uska '),
-(' usako ', ' usko '),
-(' unakee ', ' unkee '),
-(' usakee ', ' uskee '),
+(' usakaa ', ' us ka '),
+(' usako ', ' us ko '),
+(' unakee ', ' un ki '),
+(' usakee ', ' us ki '),
+(' usase ', ' us se '),
+(' usake ', ' us ke '),
 (' humane ', ' humne '),
 (' tumane ', ' tumne '),
-(' usane ', ' usne '),
+(' usane ', ' us ne '),
 (' apane ', ' apne '),
 (' a ', ' aa '),
 (' saahab ', ' sahib '),
@@ -615,9 +618,9 @@ colloquial_dict = OrderedDict([
 (' karate ', ' karte '),
 (' apako ' , ' apko '),
 (' tumako ' , ' tumko '),
-(' isake ', ' iske '),
-(' isakee ', ' iskee'),
-(' isako ', ' isko '),
+(' isake ', ' is ke '),
+(' isakee ', ' is kee'),
+(' isako ', ' is ko '),
 ])
 
 ###################################################
@@ -635,13 +638,15 @@ def main():
   for key,value in d2r_dict.items():
   	text=text.replace(key,value)
 
+  ## Replace certain words with colloquial romanizations
+  for key,value in colloquial_dict.items():
+    text=text.replace(key,value)
+
   ## Reapply punctuation
   for key,value in punct_dict_2.items():
     text=text.replace(key,value)
 
-  ## Replace certain words with colloquial romanizations
-  for key,value in colloquial_dict.items():
-    text=text.replace(key,value)
+  text = '. '.join(list(map(lambda x: x.strip().capitalize(), text.split('.'))))
 
   print(text)
   fout.write(text)
